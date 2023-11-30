@@ -1,4 +1,6 @@
 <!-- # plantuml.nvim -->
+Fork from https://gitlab.com/itaranto/plantuml.nvim
+remove the webp git-lfs file.
 
 This Neovim plugin allows using [PlantUML](https://plantuml.com/) to render diagrams in real time.
 
