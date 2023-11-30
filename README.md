@@ -17,7 +17,7 @@ the following renderers are implemented:
 
 ## Installation
 
-Install with [lazy.nvim](https://github.com/folke/lazy.nvim):
+Install on the Lunarvim:
 
 ```lua
 {
