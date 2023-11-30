@@ -21,86 +21,45 @@ Install with [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  'https://gitlab.com/itaranto/plantuml.nvim',
-  version = '*',
-  config = function() require('plantuml').setup() end,
-}
-```
-
-Install with [packer](https://github.com/wbthomason/packer.nvim):
-
-```lua
-use {
-  'https://gitlab.com/itaranto/plantuml.nvim',
-  tag = '*',
-  config = function() require('plantuml').setup() end
-}
+    "bnse/plantuml.nvim",
+    version = "*",
+    config = function()
+        require("lvim.lsp.manager").setup("plantuml", {
+            renderer = {
+                type = "text",
+                options = {
+                    split_cmd = "split", -- Allowed values: `split`, `vsplit`.
+                },
+            },
+            render_on_write = false, -- Set to false to disable auto-rendering.
+        })
+    end,
+},
 ```
 
 ## Dependencies
 
-To use this plugin, you'll need PlantUML installed. If using any of the external renderers, you'll
-need to have them installed as well.
-
-You should be able to install any of these with your system's package manager, for example, on Arch
-Linux:
-
 ```sh
-sudo pacman -S plantuml imv feh
+brew install plantuml
 ```
 
-## Configuration
+Install the SVG viewer `Gapplin` from the APP STORE.
 
-To use the default configuration, do:
 
-```lua
-require('plantuml').setup()
-```
+Use `reflex` to observe file changes.
 
-The default values are:
-
-```lua
-{
-  renderer = {
-    type = 'text',
-    options = {
-      split_cmd = 'vsplit', -- Allowed values: `split`, `vsplit`.
-    }
-  },
-  render_on_write = true, -- Set to false to disable auto-rendering.
+```bash
+puml () 
+{ 
+    if [[ "$#" -ne 1 ]]; then
+        printf "Usage: puml  %s\n" "demo.plantuml";
+        return 1;
+    fi;
+    reflex -d none -r '\.plantuml$' -s -- sh -c "plantuml -tsvg ${1}"
 }
 ```
 
-To use other renderers, change the `type` property.
-
-Defaults for the *image* renderer:
-
-```lua
-{
-  renderer = {
-    type = 'image',
-    options = {
-      prog = 'feh',
-      dark_mode = true,
-    }
-  },
-  render_on_write = true,
-}
-```
-
-Defaults for the *imv* renderer:
-
-```lua
-{
-  renderer = {
-    type = 'imv',
-    options = {
-      dark_mode = true,
-    }
-  },
-  render_on_write = true,
-}
-```
+Use Gapplin to view SVG files.
 
 ## Usage
 
@@ -118,6 +77,3 @@ The supported file extensions are:
 - `.puml`
 - `.wsd`
 
-## Contributing
-
-*"If your commit message sucks, I'm not going to accept your pull request."*
